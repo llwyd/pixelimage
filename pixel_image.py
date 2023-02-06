@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 
-square_size = 75
+square_size = 15
 bands = 3
 
 with Image.open("blackbird.jpg") as im:
@@ -28,12 +28,6 @@ with Image.open("blackbird.jpg") as im:
             x[i_smol][j_smol][2] += px[i,j][2]
 
     x = np.floor_divide(x,square_size**2)
-
-    new_im = Image.new( 'RGB', (w_smol,h_smol) )
-    new_px = new_im.load()
-    for i in range( w_smol ):
-        for j in range( h_smol ):
-            new_px[i,j] = ( x[i][j][0],x[i][j][1],x[i][j][2])
 
     new_out = Image.new( 'RGB', (w,h) )
     new_px = new_out.load()
