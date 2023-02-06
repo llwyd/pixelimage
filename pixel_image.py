@@ -1,7 +1,7 @@
-from PIL import Image
+from PIL import Image, ImageEnhance
 import numpy as np
 
-square_size = 15
+square_size = 75
 bands = 3
 
 with Image.open("blackbird.jpg") as im:
@@ -39,5 +39,12 @@ with Image.open("blackbird.jpg") as im:
 
             new_px[i,j] = ( x[i_smol][j_smol][0],x[i_smol][j_smol][1],x[i_smol][j_smol][2])
 
+
+    convertor = ImageEnhance.Contrast(new_out)
+    new_out = convertor.enhance(1)
+    convertor = ImageEnhance.Sharpness(new_out)
+    new_out = convertor.enhance(1)
+    convertor = ImageEnhance.Color(new_out)
+    new_out = convertor.enhance(1)
 
     new_out.show()
